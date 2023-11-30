@@ -1,0 +1,20 @@
+<mat-card class="example-card">
+  <mat-card-title>Wordle</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <mat-card-subtitle>Empieza a jugar</mat-card-subtitle>
+    <mat-card-actions><button mat-stroked-button (click)="seleccionarPalabra()">START</button></mat-card-actions>
+    <mat-divider></mat-divider>
+    <mat-card-subtitle>Intenta adivinar la palabra</mat-card-subtitle>
+    <div class="contenedor">
+      <table>
+        <th *ngFor="let letra of letras; let i = index">
+          <tr><input matInput placeholder="letra" size="5" [(ngModel)]="letras[i]"></tr>
+        </th>
+      </table>
+    </div>
+    <mat-card-actions><button mat-stroked-button (click)="comprobarPalabra()">COMPROBAR</button></mat-card-actions>
+    <mat-divider></mat-divider>
+    <div> {{mensajeResultado}}</div>
+  </mat-card-content>
+</mat-card>
