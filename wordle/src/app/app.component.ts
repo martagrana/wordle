@@ -23,6 +23,7 @@ export class AppComponent {
 
   comprobarPalabra() {
     let contadorAciertos: number = 0;
+    let letrasAcertadas: string[] = [];
     if (this.palabraAComprobar.length !== this.palabraSeleccionada.length) {
       this.mensajeResultado = 'No has introducido una palabra de 5 letras';
     }
@@ -33,14 +34,13 @@ export class AppComponent {
         for (let index = 0; index < this.palabraAComprobar.length; index++) {
           if (this.palabraAComprobar[index] === this.palabraSeleccionada[index]) {
             contadorAciertos++;
+            letrasAcertadas.push(this.palabraAComprobar[index]);
           }
         }
-        this.mensajeResultado = `Has acertado ${contadorAciertos} letras. Intenta de nuevo.`;
+        this.mensajeResultado = `Has acertado ${contadorAciertos} letras. Las letras acertadas son ${letrasAcertadas}. Intenta de nuevo.`;
       }
     }
   }
-
-
 
 
   /*version descomponiendo la palabra y formando un array con las letras
