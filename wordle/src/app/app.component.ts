@@ -11,8 +11,7 @@ export class AppComponent {
   diccionario: string[] = ['cisne', 'erizo', 'tigre', 'mosca', 'cabra'];
   palabraSeleccionada: string = '';
   arrayLetrasPalabraSeleccionada: string[] = [];
-
-  letras: string[] = ['', '', '', '', ''];
+  palabraAcomprobar: string = '';
 
   mensajeResultado: string = '';
 
@@ -25,12 +24,24 @@ export class AppComponent {
   }
 
   comprobarPalabra() {
-    if (this.letras.join('') === this.palabraSeleccionada) {
+    if (this.palabraAcomprobar === this.palabraSeleccionada) {
       this.mensajeResultado = '¡Has acertado!';
     } else {
       this.mensajeResultado = 'Intenta de nuevo';
     }
   }
 
+
+  /* ESto era necesario en la versión con 5 inputs
+
+  letras: string[] = ['', '', '', '', ''];
+
+  comprobarPalabra() {
+     if (this.letras.join('') === this.palabraSeleccionada) {
+       this.mensajeResultado = '¡Has acertado!';
+     } else {
+       this.mensajeResultado = 'Intenta de nuevo';
+     }
+   }*/
 
 }
