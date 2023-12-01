@@ -23,15 +23,20 @@ export class AppComponent {
 
   comprobarPalabra() {
     let contadorAciertos: number = 0;
-    if (this.palabraAComprobar === this.palabraSeleccionada) {
-      this.mensajeResultado = '¡Has acertado!';
-    } else {
-      for (let index = 0; index < this.palabraAComprobar.length; index++) {
-        if (this.palabraAComprobar[index] === this.palabraSeleccionada[index]) {
-          contadorAciertos++;
+    if (this.palabraAComprobar.length !== this.palabraSeleccionada.length) {
+      this.mensajeResultado = 'No has introducido una palabra de 5 letras';
+    }
+    else {
+      if (this.palabraAComprobar === this.palabraSeleccionada) {
+        this.mensajeResultado = '¡Has acertado!';
+      } else {
+        for (let index = 0; index < this.palabraAComprobar.length; index++) {
+          if (this.palabraAComprobar[index] === this.palabraSeleccionada[index]) {
+            contadorAciertos++;
+          }
         }
+        this.mensajeResultado = `Has acertado ${contadorAciertos} letras. Intenta de nuevo.`;
       }
-      this.mensajeResultado = `Has acertado ${contadorAciertos} letras. Intenta de nuevo.`;
     }
   }
 
