@@ -22,6 +22,24 @@ export class AppComponent {
   }
 
   comprobarPalabra() {
+    let contadorAciertos: number = 0;
+    if (this.palabraAComprobar === this.palabraSeleccionada) {
+      this.mensajeResultado = '¡Has acertado!';
+    } else {
+      for (let index = 0; index < this.palabraAComprobar.length; index++) {
+        if (this.palabraAComprobar[index] === this.palabraSeleccionada[index]) {
+          contadorAciertos++;
+        }
+      }
+      this.mensajeResultado = `Has acertado ${contadorAciertos} letras. Intenta de nuevo.`;
+    }
+  }
+
+
+
+
+  /*version descomponiendo la palabra y formando un array con las letras
+  comprobarPalabra() {
     let letrasPalabraSeleccionada: string[] = [];
     let letrasPalabraAComprobar: string[] = [];
     letrasPalabraSeleccionada = this.palabraSeleccionada.split('');
@@ -44,9 +62,9 @@ export class AppComponent {
         contadorAciertos = contadorAciertos++;
         console.log(contadorAciertos);
         this.mensajeResultado = `Has acertado ${contadorAciertos} letras. Intenta de nuevo.`;
-
+ 
       }
     }
-  }
+  }*/
 
 }

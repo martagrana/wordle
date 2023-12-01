@@ -7,7 +7,7 @@
     <mat-divider></mat-divider>
     <mat-card-subtitle>Intenta adivinar la palabra de 5 letras</mat-card-subtitle>
     <div class="contenedor">
-      <input matInput placeholder="palabra" size="10" [(ngModel)]="palabraAComprobar">
+      <input matInput placeholder="palabra" size="10" maxlength="5" [(ngModel)]="palabraAComprobar">
     </div>
     <mat-card-actions><button mat-stroked-button (click)="comprobarPalabra()">COMPROBAR</button></mat-card-actions>
     <mat-divider></mat-divider>
