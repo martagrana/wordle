@@ -1,20 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DiccionarioService } from './diccionario.service';
+import { DiccionarioRemotoService } from './diccionario-remoto.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'wordle';
 
-  diccionario: string[] = this.servicio.listarDiccionario();
+  diccionario: string[] = [];
   palabraSeleccionada: string = '';
   palabraAComprobar: string = '';
   mensajeResultado: string = '';
 
   constructor(public servicio: DiccionarioService) { }
+  ngOnInit(): void {
+    this.servicio.listarDiccionario().subscribe(resultado => {
+      this.diccionario = resultado;
+    });
+  }
 
   seleccionarPalabra(): void {
     let indiceAleatorio = Math.round(Math.random() * this.diccionario.length);

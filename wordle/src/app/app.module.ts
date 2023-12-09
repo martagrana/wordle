@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MatCardModule, MatButtonModule, MatIconModule, MatDividerModule,
-    MatInputModule, MatFormFieldModule
+    MatInputModule, MatFormFieldModule, HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
