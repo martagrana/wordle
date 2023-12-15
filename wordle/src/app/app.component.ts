@@ -50,15 +50,20 @@ export class AppComponent implements OnInit {
       if (this.palabraAComprobar === this.palabraSeleccionada) {
         this.mensajeResultado = '¡Has acertado!';
       } else {
-        let contadorAciertos: number = 0;
+        let contadorAciertosPosicionCorrecta: number = 0;
+        let contadorAciertosLetraIncluida: number = 0;
         let letrasAcertadas: string[] = [];
         for (let index = 0; index < this.palabraAComprobar.length; index++) {
           if (this.palabraAComprobar[index] === this.palabraSeleccionada[index]) {
-            contadorAciertos++;
+            contadorAciertosPosicionCorrecta += 3;
             letrasAcertadas.push(this.palabraAComprobar[index]);
+          } else if (this.palabraSeleccionada.includes(this.palabraAComprobar[index])) {
+            contadorAciertosLetraIncluida += 1;
           }
         }
-        this.mensajeResultado = `Has acertado ${contadorAciertos} letras. Las letras acertadas son ${letrasAcertadas}. Intenta de nuevo.`;
+        let puntuacionTotal: number = 0;
+        puntuacionTotal = contadorAciertosPosicionCorrecta + contadorAciertosLetraIncluida;
+        this.mensajeResultado = `Tu puntuación es ${puntuacionTotal}. Las letras acertadas son ${letrasAcertadas}. Intenta de nuevo.`;
       }
     }
   }
