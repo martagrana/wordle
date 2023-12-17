@@ -13,8 +13,11 @@
     <mat-divider></mat-divider>
     <div> {{mensajeResultado}}</div>
 
-    <div class="acierto" *ngIf="hasAcertado">¡Has acertado!</div>
-    <div class="fallo" *ngIf="hasFallado">Tu puntuación es <div class="puntuacion">{{puntuacionTotal}}</div>. Las letras
+    <div class="acierto" *ngIf="hasAcertado">¡Has acertado!.Tu puntuación es <div class="puntuacion">{{puntuacionTotal}}
+      </div>
+    </div>
+    <div class="fallo" *ngIf="hasFallado">Tu puntuación es <div class="puntuacion">{{puntuacionTotal}}</div>. Las
+      letras
       acertadas son
       {{letrasAcertadas}}. Intenta de nuevo.</div>
   </mat-card-content>

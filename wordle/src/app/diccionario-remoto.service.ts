@@ -15,4 +15,5 @@ export class DiccionarioRemotoService {
     return this.httpClient.get<string[]>('https://random-word-api.herokuapp.com/word');
   }
 
+
 }

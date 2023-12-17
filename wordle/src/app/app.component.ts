@@ -47,6 +47,20 @@ export class AppComponent implements OnInit {
     }
   }
 
+  calcularPuntuacion(): number {
+    let contadorAciertosPosicionCorrecta: number = 0;
+    let contadorAciertosLetraIncluida: number = 0;
+    for (let index = 0; index < this.palabraAComprobar.length; index++) {
+      if (this.palabraAComprobar[index] === this.palabraSeleccionada[index]) {
+        contadorAciertosPosicionCorrecta += 3;
+        this.letrasAcertadas.push(this.palabraAComprobar[index]);
+      } else if (this.palabraSeleccionada.includes(this.palabraAComprobar[index])) {
+        contadorAciertosLetraIncluida += 1;
+      }
+    }
+    return contadorAciertosPosicionCorrecta + contadorAciertosLetraIncluida;
+  }
+
   comprobarPalabra() {
     this.hasAcertado = false;
     this.hasFallado = false;
@@ -57,20 +71,9 @@ export class AppComponent implements OnInit {
       if (this.palabraAComprobar === this.palabraSeleccionada) {
         this.hasAcertado = true;
       } else {
-        let contadorAciertosPosicionCorrecta: number = 0;
-        let contadorAciertosLetraIncluida: number = 0;
-
-        for (let index = 0; index < this.palabraAComprobar.length; index++) {
-          if (this.palabraAComprobar[index] === this.palabraSeleccionada[index]) {
-            contadorAciertosPosicionCorrecta += 3;
-            this.letrasAcertadas.push(this.palabraAComprobar[index]);
-          } else if (this.palabraSeleccionada.includes(this.palabraAComprobar[index])) {
-            contadorAciertosLetraIncluida += 1;
-          }
-        }
         this.hasFallado = true;
-        this.puntuacionTotal = contadorAciertosPosicionCorrecta + contadorAciertosLetraIncluida;
       }
+      this.puntuacionTotal = this.calcularPuntuacion();
     }
 
   }
