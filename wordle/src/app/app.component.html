@@ -12,5 +12,10 @@
     <mat-card-actions><button mat-stroked-button (click)="comprobarPalabra()">COMPROBAR</button></mat-card-actions>
     <mat-divider></mat-divider>
     <div> {{mensajeResultado}}</div>
+
+    <div class="acierto" *ngIf="hasAcertado">¡Has acertado!</div>
+    <div class="fallo" *ngIf="hasFallado">Tu puntuación es <div class="puntuacion">{{puntuacionTotal}}</div>. Las letras
+      acertadas son
+      {{letrasAcertadas}}. Intenta de nuevo.</div>
   </mat-card-content>
 </mat-card>

@@ -14,6 +14,10 @@ export class AppComponent implements OnInit {
   palabraSeleccionada: string = '';
   palabraAComprobar: string = '';
   mensajeResultado: string = '';
+  hasAcertado: boolean = false;
+  hasFallado: boolean = false;
+  puntuacionTotal: number = 0;
+  letrasAcertadas: string[] = [];
 
   constructor(public servicio: DiccionarioService) { }
   ngOnInit(): void {
@@ -23,6 +27,8 @@ export class AppComponent implements OnInit {
   }
 
   seleccionarPalabra(): void {
+    this.hasAcertado = false;
+    this.hasFallado = false;
     let indiceAleatorio = Math.round(Math.random() * this.diccionario.length);
     this.palabraSeleccionada = this.diccionario[indiceAleatorio];
     console.log(this.palabraSeleccionada);
@@ -42,30 +48,31 @@ export class AppComponent implements OnInit {
   }
 
   comprobarPalabra() {
-
+    this.hasAcertado = false;
+    this.hasFallado = false;
     if (!this.comprobarTamanoPalabrasSonIguales()) {
       this.mensajeResultado = 'No has introducido una palabra de 5 letras';
     }
     else {
       if (this.palabraAComprobar === this.palabraSeleccionada) {
-        this.mensajeResultado = '¡Has acertado!';
+        this.hasAcertado = true;
       } else {
         let contadorAciertosPosicionCorrecta: number = 0;
         let contadorAciertosLetraIncluida: number = 0;
-        let letrasAcertadas: string[] = [];
+
         for (let index = 0; index < this.palabraAComprobar.length; index++) {
           if (this.palabraAComprobar[index] === this.palabraSeleccionada[index]) {
             contadorAciertosPosicionCorrecta += 3;
-            letrasAcertadas.push(this.palabraAComprobar[index]);
+            this.letrasAcertadas.push(this.palabraAComprobar[index]);
           } else if (this.palabraSeleccionada.includes(this.palabraAComprobar[index])) {
             contadorAciertosLetraIncluida += 1;
           }
         }
-        let puntuacionTotal: number = 0;
-        puntuacionTotal = contadorAciertosPosicionCorrecta + contadorAciertosLetraIncluida;
-        this.mensajeResultado = `Tu puntuación es ${puntuacionTotal}. Las letras acertadas son ${letrasAcertadas}. Intenta de nuevo.`;
+        this.hasFallado = true;
+        this.puntuacionTotal = contadorAciertosPosicionCorrecta + contadorAciertosLetraIncluida;
       }
     }
+
   }
 
 
