@@ -1,10 +1,10 @@
-Juego de Wordle
+# Juego de Wordle
 
 Este es un proyecto de juego de Wordle desarrollado en Angular.
 El juego selecciona aleatoriamente una palabra del diccionario y permite al jugador adivinar la palabra.
 La puntuación se calcula según las letras acertadas en la palabra y su posición.
 
-Características
+# Características
 
 Selección Aleatoria de Palabras: La función seleccionarPalabra() elige aleatoriamente una palabra del diccionario.
 
