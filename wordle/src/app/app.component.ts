@@ -26,6 +26,11 @@ export class AppComponent implements OnInit {
     });
   }
 
+  /**
+   * Esta función se activa mediante un boton para comenzar a jugar.
+   * Selecciona una palabra aleatoria del diccionario.
+   *  
+   */
   seleccionarPalabra(): void {
     this.hasAcertado = false;
     this.hasFallado = false;
@@ -47,27 +52,37 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /**
+   * Esta función calcula la puntuación por letras acertadas de la palabra.
+   * Suma 3 puntos si la letra está en la posición correcta y 1 punto si está incluida pero en otra posición.
+   *  
+   */
   calcularPuntuacion(): number {
     let contadorAciertosPosicionCorrecta: number = 0;
     let contadorAciertosLetraIncluida: number = 0;
-    for (let index = 0; index < this.palabraAComprobar.length; index++) {
-      if (this.palabraAComprobar[index] === this.palabraSeleccionada[index]) {
+    for (let indexAComprobar = 0; indexAComprobar < this.palabraAComprobar.length; indexAComprobar++) {
+      if (this.palabraAComprobar[indexAComprobar] === this.palabraSeleccionada[indexAComprobar]) {
         contadorAciertosPosicionCorrecta += 3;
-        this.letrasAcertadas.push(this.palabraAComprobar[index]);
-      } else if (this.palabraSeleccionada.includes(this.palabraAComprobar[index])) {
-        contadorAciertosLetraIncluida += 1;
+        this.letrasAcertadas.push(this.palabraAComprobar[indexAComprobar]);
+      } else {
+        for (let indexSeleccionada = 0; indexSeleccionada < this.palabraSeleccionada.length; indexSeleccionada++) {
+          if (this.palabraAComprobar[indexAComprobar] === this.palabraSeleccionada[indexSeleccionada]) {
+            contadorAciertosLetraIncluida += 1;
+          }
+        }
       }
     }
     return contadorAciertosPosicionCorrecta + contadorAciertosLetraIncluida;
   }
 
-  comprobarPalabra() {
+  /**
+  * Esta función se utiliza mediante un botón que muestra el resultado del juego. 
+  * Comprueba si la palabra es correcta y devuelve una puntuación según las letras acertadas
+  */
+  comprobarPalabra(): void {
     this.hasAcertado = false;
     this.hasFallado = false;
-    if (!this.comprobarTamanoPalabrasSonIguales()) {
-      this.mensajeResultado = 'No has introducido una palabra de 5 letras';
-    }
-    else {
+    if (this.comprobarTamanoPalabrasSonIguales()) {
       if (this.palabraAComprobar === this.palabraSeleccionada) {
         this.hasAcertado = true;
       } else {
@@ -75,37 +90,6 @@ export class AppComponent implements OnInit {
       }
       this.puntuacionTotal = this.calcularPuntuacion();
     }
-
   }
-
-
-  /*version descomponiendo la palabra y formando un array con las letras
-  comprobarPalabra() {
-    let letrasPalabraSeleccionada: string[] = [];
-    let letrasPalabraAComprobar: string[] = [];
-    letrasPalabraSeleccionada = this.palabraSeleccionada.split('');
-    console.log(letrasPalabraSeleccionada);
-    letrasPalabraAComprobar = this.palabraAComprobar.split('');
-    console.log(letrasPalabraAComprobar);
-    let contadorAciertos: number = 0;
-    if (letrasPalabraAComprobar.length !== letrasPalabraSeleccionada.length) {
-      this.mensajeResultado = 'No has introducido una palabra de 5 letras';
-    }
-    else {
-      if (this.palabraAComprobar === this.palabraSeleccionada) {
-        this.mensajeResultado = '¡Has acertado!';
-      } else {
-        for (let i = 0; i < letrasPalabraAComprobar.length; i++) {
-          if (letrasPalabraAComprobar[i] === letrasPalabraSeleccionada[i]) {
-            contadorAciertos++
-          }
-        }
-        contadorAciertos = contadorAciertos++;
-        console.log(contadorAciertos);
-        this.mensajeResultado = `Has acertado ${contadorAciertos} letras. Intenta de nuevo.`;
- 
-      }
-    }
-  }*/
 
 }

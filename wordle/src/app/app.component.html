@@ -13,6 +13,7 @@
     <mat-divider></mat-divider>
     <div> {{mensajeResultado}}</div>
 
+    <div *ngIf="!comprobarTamanoPalabrasSonIguales()">Introduce una palabra de 5 letras</div>
     <div class="acierto" *ngIf="hasAcertado">¡Has acertado!.Tu puntuación es <div class="puntuacion">{{puntuacionTotal}}
       </div>
     </div>
