@@ -52,6 +52,21 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /** Implementar funcion "Includes" propia. 
+   * Es una funcion que recibe una cadena/string y una letra/caracter y devuelve un boolean. 
+   * Devuelve True si la letra está dentro de la cadena
+    */
+  includes(palabraAAdivinar: string, letra: string): boolean {
+    let estaDentro: boolean = false;
+    for (let index = 0; index < palabraAAdivinar.length; index++) {
+      if (letra === palabraAAdivinar[index]) {
+        estaDentro = true;
+        break;
+      }
+    }
+    return estaDentro;
+  }
+
   /**
    * Esta función calcula la puntuación por letras acertadas de la palabra.
    * Suma 3 puntos si la letra está en la posición correcta y 1 punto si está incluida pero en otra posición.
@@ -60,15 +75,16 @@ export class AppComponent implements OnInit {
   calcularPuntuacion(): number {
     let contadorAciertosPosicionCorrecta: number = 0;
     let contadorAciertosLetraIncluida: number = 0;
+    let copiaPalabraSeleccionada: string = this.palabraSeleccionada;
     for (let indexAComprobar = 0; indexAComprobar < this.palabraAComprobar.length; indexAComprobar++) {
-      if (this.palabraAComprobar[indexAComprobar] === this.palabraSeleccionada[indexAComprobar]) {
+      if (this.palabraAComprobar[indexAComprobar] === copiaPalabraSeleccionada[indexAComprobar]) {
         contadorAciertosPosicionCorrecta += 3;
         this.letrasAcertadas.push(this.palabraAComprobar[indexAComprobar]);
+        copiaPalabraSeleccionada = copiaPalabraSeleccionada.slice(0, indexAComprobar) + copiaPalabraSeleccionada.slice(indexAComprobar + 1, copiaPalabraSeleccionada.length);
       } else {
-        for (let indexSeleccionada = 0; indexSeleccionada < this.palabraSeleccionada.length; indexSeleccionada++) {
-          if (this.palabraAComprobar[indexAComprobar] === this.palabraSeleccionada[indexSeleccionada]) {
-            contadorAciertosLetraIncluida += 1;
-          }
+        if (this.includes(copiaPalabraSeleccionada, this.palabraAComprobar[indexAComprobar])) {
+          contadorAciertosLetraIncluida += 1;
+          copiaPalabraSeleccionada = copiaPalabraSeleccionada.slice(0, indexAComprobar) + copiaPalabraSeleccionada.slice(indexAComprobar + 1, copiaPalabraSeleccionada.length);
         }
       }
     }
